@@ -1,124 +1,123 @@
 import React, { useRef } from 'react'
-import { useFadeIn, useSlideUp, useParallax } from '../hooks/useGSAPAnimations'
+import { useFadeIn, useSlideUp, useParallax, useStagger } from '../hooks/useGSAPAnimations'
 
 const About = () => {
   const sectionRef = useRef(null)
   const titleRef = useFadeIn(0.2)
-  const contentRef = useSlideUp(0.4)
+  const cardsRef = useStagger(0.4, 0.2)
+  const contentRef = useSlideUp(0.8)
   const imageRef = useFadeIn(0.6)
   const parallaxRef = useParallax(0.3)
 
   return (
-    <section id="about" ref={sectionRef} className="section-padding bg-gray-50 relative overflow-hidden">
-      {/* Parallax background elements */}
-      <div ref={parallaxRef} className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-primary-300 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-secondary-300 rounded-full blur-2xl"></div>
-      </div>
-
+    <section id="about" className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-primary-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+      
       <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="space-y-6">
-            <div ref={titleRef}>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
-                Eco-Friendly Cleaning for 
-                <span className="text-gradient">Brighter Spaces</span>
-              </h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"></div>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
+            Redefining <span className="text-gradient-primary">Clean</span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            We're not just a cleaning service – we're your partners in creating healthier, more productive spaces that inspire and energize.
+          </p>
+        </div>
+        
+        <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8 mb-16">
+          {/* Mission Card */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
-            
-            <div ref={contentRef} className="space-y-4">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                At BeKlin, we believe that a clean space is more than just aesthetically pleasing—it's essential for your health, productivity, and peace of mind. As Moncton's premier cleaning service, we've built our reputation on delivering exceptional results while prioritizing environmental responsibility.
-              </p>
-              
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Our team of trained professionals uses only eco-friendly products and proven techniques to ensure your space is not just clean, but truly healthy. Whether it's your home sanctuary or your business environment, we treat every space with the care and attention it deserves.
-              </p>
-              
-              <p className="text-lg text-gray-700 leading-relaxed">
-                We understand that every client has unique needs, which is why we offer customizable cleaning solutions that fit your schedule, budget, and specific requirements. From regular maintenance to deep cleaning services, we're here to make your life easier and your spaces brighter.
-              </p>
-            </div>
-            
-            {/* Features */}
-            <div className="grid sm:grid-cols-2 gap-4 mt-8">
-              {[
-                {
-                  icon: (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  ),
-                  title: "100% Eco-Friendly",
-                  description: "Safe for your family and pets"
-                },
-                {
-                  icon: (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  ),
-                  title: "Fully Insured",
-                  description: "Complete peace of mind"
-                },
-                {
-                  icon: (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h12a1 1 0 001-1V7l-7-5zM10 12a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                  ),
-                  title: "Local Experts",
-                  description: "Proudly serving Moncton, NB"
-                },
-                {
-                  icon: (
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
-                  ),
-                  title: "Flexible Scheduling",
-                  description: "Work around your schedule"
-                }
-              ].map((feature, index) => (
-                <div key={index} className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm">
-                  <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
-                    {feature.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{feature.title}</h4>
-                    <p className="text-sm text-gray-600">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+            <p className="text-gray-600 leading-relaxed">
+              To transform spaces into pristine environments that promote health, productivity, and well-being through innovative cleaning solutions and exceptional service.
+            </p>
           </div>
           
-          {/* Image */}
-          <div ref={imageRef} className="relative">
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              {/* Placeholder for cleaning image */}
-              <div className="aspect-[4/5] bg-gradient-to-br from-primary-400 to-secondary-500 flex items-center justify-center">
-                <div className="text-center text-white p-8">
-                  <svg className="w-24 h-24 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-lg font-medium">Professional Cleaning Services</p>
-                  <p className="text-sm opacity-80">Eco-friendly • Reliable • Trusted</p>
-                </div>
-              </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent-400 rounded-full opacity-80"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary-400 rounded-full opacity-60"></div>
+          {/* Values Card */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Integrity, excellence, and environmental responsibility guide everything we do. We believe in sustainable practices that protect both your space and our planet.
+            </p>
+          </div>
+          
+          {/* Experience Card */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Promise</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Every service comes with our 100% satisfaction guarantee. We're not satisfied until you're completely happy with the results we deliver.
+            </p>
+          </div>
+        </div>
+        
+        {/* Stats Section */}
+        <div ref={contentRef} className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-40 h-40 border border-white/20 rounded-full"></div>
+            <div className="absolute top-20 right-20 w-32 h-32 border border-white/20 rounded-full"></div>
+            <div className="absolute bottom-10 left-1/3 w-24 h-24 border border-white/20 rounded-full"></div>
+          </div>
+          
+          <div className="relative z-10">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4">Trusted by Moncton</h3>
+              <p className="text-xl text-primary-100">Numbers that speak for themselves</p>
             </div>
             
-            {/* Stats overlay */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 border border-gray-100">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">500+</div>
-                <div className="text-sm text-gray-600">Happy Clients</div>
+                <div className="text-4xl md:text-5xl font-bold text-accent-400 mb-2">500+</div>
+                <div className="text-primary-100">Satisfied Clients</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-accent-400 mb-2">5+</div>
+                <div className="text-primary-100">Years Excellence</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-accent-400 mb-2">100%</div>
+                <div className="text-primary-100">Eco-Friendly</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-accent-400 mb-2">24/7</div>
+                <div className="text-primary-100">Support</div>
+              </div>
+            </div>
+            
+            {/* Featured Testimonial */}
+            <div className="mt-12 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+              <div className="flex items-center justify-center mb-6">
+                <div className="flex text-accent-400">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-6 h-6 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              <blockquote className="text-xl md:text-2xl text-center mb-6 italic">
+                "BeKlin doesn't just clean – they transform spaces. Our office has never looked better, and our team's productivity has noticeably improved!"
+              </blockquote>
+              <div className="text-center">
+                <p className="font-semibold text-accent-400">Sarah Johnson</p>
+                <p className="text-primary-200">CEO, Moncton Tech Solutions</p>
               </div>
             </div>
           </div>

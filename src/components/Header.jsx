@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { gsap } from 'gsap'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/BeKlin-logo.png'
+import logoWhite from '../assets/BeKlin-white.png'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,66 +38,62 @@ const Header = () => {
     }
   }
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMenuOpen(false)
-    }
+  const closeMenu = () => {
+    setIsMenuOpen(false)
   }
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      isScrolled || !isHomePage ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container-custom">
         <div className="header-content flex items-center justify-between py-4">
           {/* Logo */}
-          <div className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img 
-              src={logo} 
+              src={isScrolled || !isHomePage ? logo : logoWhite} 
               alt="BeKlin Logo" 
-              className="h-10 w-auto"
+              className="h-10 w-auto transition-all duration-300"
             />
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { name: 'Home', id: 'hero' },
-              { name: 'About', id: 'about' },
-              { name: 'Services', id: 'services' },
-              { name: 'Eco Benefits', id: 'eco-benefits' },
-              { name: 'Careers', id: 'careers' },
-              { name: 'Contact', id: 'contact' }
+              { name: 'Home', path: '/' },
+              { name: 'Services', path: '/services' },
+              { name: 'Careers', path: '/careers' },
+              { name: 'Contact', path: '/contact' }
             ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
+              <Link
+                key={item.path}
+                to={item.path}
                 className={`font-medium transition-colors duration-300 hover:text-primary-500 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
+                  location.pathname === item.path 
+                    ? 'text-primary-500' 
+                    : isScrolled || !isHomePage ? 'text-gray-700' : 'text-white'
                 }`}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <button
-              onClick={() => scrollToSection('contact')}
+            <Link
+              to="/booking"
               className="btn-primary"
             >
               Book Now
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMenu}
             className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-              isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              isScrolled || !isHomePage ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
             }`}
             aria-label="Toggle menu"
           >
@@ -127,27 +127,29 @@ const Header = () => {
           <div className="mobile-menu md:hidden bg-white border-t border-gray-200 py-4">
             <nav className="flex flex-col space-y-4">
               {[
-                { name: 'Home', id: 'hero' },
-                { name: 'About', id: 'about' },
-                { name: 'Services', id: 'services' },
-                { name: 'Eco Benefits', id: 'eco-benefits' },
-                { name: 'Careers', id: 'careers' },
-                { name: 'Contact', id: 'contact' }
+                { name: 'Home', path: '/' },
+                { name: 'Services', path: '/services' },
+                { name: 'Careers', path: '/careers' },
+                { name: 'Contact', path: '/contact' }
               ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-left text-gray-700 font-medium hover:text-primary-500 transition-colors duration-300"
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={closeMenu}
+                  className={`text-left font-medium hover:text-primary-500 transition-colors duration-300 ${
+                    location.pathname === item.path ? 'text-primary-500' : 'text-gray-700'
+                  }`}
                 >
                   {item.name}
-                </button>
+                </Link>
               ))}
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="btn-primary w-full mt-4"
+              <Link
+                to="/booking"
+                onClick={closeMenu}
+                className="btn-primary w-full mt-4 text-center"
               >
                 Book Now
-              </button>
+              </Link>
             </nav>
           </div>
         )}

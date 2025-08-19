@@ -98,7 +98,7 @@ const Contact = () => {
         
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div ref={formRef} className="bg-white rounded-2xl shadow-lg p-8">
+          <div ref={formRef} className="bg-white rounded-2xl shadow-lg p-8 h-fit">
             <h3 className="text-2xl font-heading font-bold text-gray-900 mb-6">
               Request Your Quote
             </h3>

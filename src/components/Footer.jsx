@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFadeIn } from '../hooks/useGSAPAnimations'
+import beklinLogo from '../assets/BeKlin-white.png'
 
 const Footer = () => {
   const footerRef = useFadeIn(0.2)
@@ -78,11 +79,12 @@ const Footer = () => {
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-1">
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">B</span>
-                </div>
-                <span className="text-2xl font-heading font-bold">BeKlin</span>
+              <div className="flex items-center space-x-3 mb-6">
+                <img 
+                  src={beklinLogo} 
+                  alt="BeKlin Logo" 
+                  className="h-12 w-auto"
+                />
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed">
                 Moncton's premier eco-friendly cleaning service. We specialize in comprehensive interior cleaning services for both residential and commercial clients.

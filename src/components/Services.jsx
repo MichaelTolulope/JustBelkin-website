@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFadeIn, useStagger, useHoverScale } from '../hooks/useGSAPAnimations'
+import EcoBenefits from './EcoBenefits'
 
 const Services = () => {
   const titleRef = useFadeIn(0.2)
@@ -69,32 +70,44 @@ const Services = () => {
     return (
       <div 
         ref={cardRef}
-        className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl"
+        className="group relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/50 hover:-translate-y-2"
       >
-        {/* Header */}
-        <div className={`bg-gradient-to-r ${service.color} p-6 text-white`}>
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="p-3 bg-white/20 rounded-lg">
-              {service.icon}
-            </div>
-            <h3 className="text-2xl font-heading font-bold">{service.title}</h3>
-          </div>
-          <p className="text-white/90 leading-relaxed">{service.description}</p>
-        </div>
+        {/* Gradient Border Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         
-        {/* Features */}
-        <div className="p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">What's Included:</h4>
-          <ul className="space-y-3">
-            {service.features.map((feature, featureIndex) => (
-              <li key={featureIndex} className="flex items-start space-x-3">
-                <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-gray-700">{feature}</span>
-              </li>
+        <div className="relative p-8">
+          {/* Icon */}
+          <div className="relative mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+              <div className="text-white text-3xl">
+                {service.icon}
+              </div>
+            </div>
+            {/* Floating decoration */}
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200"></div>
+          </div>
+          
+          <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors duration-300">
+            {service.title}
+          </h3>
+          
+          <p className="text-gray-600 mb-6 leading-relaxed">
+            {service.description}
+          </p>
+          
+          {/* Features */}
+          <div className="space-y-3 mb-8">
+            {service.features.slice(0, 3).map((feature, featureIndex) => (
+              <div key={featureIndex} className="flex items-center text-sm text-gray-600">
+                <div className="w-5 h-5 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                {feature}
+              </div>
             ))}
-          </ul>
+          </div>
           
           {/* CTA Button */}
           <button 
@@ -104,7 +117,7 @@ const Services = () => {
                 contactSection.scrollIntoView({ behavior: 'smooth' })
               }
             }}
-            className="w-full mt-6 btn-primary"
+            className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white py-3 rounded-xl hover:from-primary-600 hover:to-primary-700 transform hover:scale-105 transition-all duration-300 shadow-lg font-semibold"
           >
             Get Quote
           </button>
@@ -114,50 +127,86 @@ const Services = () => {
   }
 
   return (
-    <section id="services" className="section-padding bg-white">
-      <div className="container-custom">
+    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-20 right-0 w-80 h-80 bg-primary-200/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-0 w-64 h-64 bg-accent-200/20 rounded-full blur-3xl"></div>
+      
+      <div className="container-custom relative z-10">
         {/* Header */}
         <div ref={titleRef} className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
-            Our 
-            <span className="text-gradient">Cleaning Services</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
+            Our <span className="text-gradient-primary">Services</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Explore our broad range of tailored cleaning services, designed to exceed your expectations and maintain the highest standards of cleanliness.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Professional cleaning solutions designed to meet your unique needs. Experience the difference quality makes.
           </p>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full mx-auto mt-6"></div>
         </div>
-        
+
         {/* Services Grid */}
-        <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8 mb-16">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} index={index} />
           ))}
         </div>
-        
-        {/* Additional Info */}
-        <div className="mt-16 text-center">
-          <div className="bg-gray-50 rounded-2xl p-8">
-            <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4">
-              Need a Custom Cleaning Solution?
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Every space is unique, and so are your cleaning needs. We offer customizable cleaning packages tailored to your specific requirements, schedule, and budget.
-            </p>
-            <button 
-              onClick={() => {
-                const contactSection = document.getElementById('contact')
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-              className="btn-primary"
-            >
-              Contact Us for Custom Quote
-            </button>
+
+        {/* Enhanced CTA Section */}
+        <div className="relative">
+          <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 right-0 w-40 h-40 border-2 border-white/30 rounded-full"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 border-2 border-white/20 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 w-24 h-24 border border-white/20 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+            
+            <div className="relative z-10 text-center">
+              <h3 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                Transform Your Space Today
+              </h3>
+              <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">
+                Join hundreds of satisfied customers who trust BeKlin for their cleaning needs. Get your free consultation now.
+              </p>
+              
+              {/* Stats Row */}
+              <div className="grid grid-cols-3 gap-8 mb-8 py-6 border-y border-white/20">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent-400">24h</div>
+                  <div className="text-sm text-primary-200">Response Time</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent-400">100%</div>
+                  <div className="text-sm text-primary-200">Satisfaction</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-accent-400">Free</div>
+                  <div className="text-sm text-primary-200">Consultation</div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact')
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                  className="bg-white text-primary-700 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Get Free Quote
+                </button>
+                <button className="border-2 border-white/50 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300">
+                  Call (506) 123-4567
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
+      {/* Eco Benefits Section */}
+      <EcoBenefits />
     </section>
   )
 }
